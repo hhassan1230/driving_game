@@ -19,7 +19,7 @@ public class carController : MonoBehaviour {
 		canDrive = true;
 
 		rb = gameObject.GetComponent<Rigidbody>();
-		InvokeRepeating ("timerTick", 1, 1);
+//		InvokeRepeating ("timerTick", 1, 1);
 		// when it start then when it repeats
 		countdownTimerText.text = countdownDecNum.ToString();
 	}
@@ -68,6 +68,16 @@ public class carController : MonoBehaviour {
 	void OnTriggerEnter(Collider trigger){
 		if(trigger.gameObject.tag == "control"){
 			canDrive = false;
+		}
+		if(trigger.gameObject.tag == "goal"){
+//			print("I hit the goal!");
+			Animator tempGoalAnim = trigger.gameObject.GetComponent<Animator>();
+			tempGoalAnim.SetBool("stopAnim", true);
+			ParticleSystem tempParticleEmit = trigger.gameObject.GetComponent<ParticleSystem>();
+			tempParticleEmit.Play();
+			trigger.gameObject.GetComponent<Renderer>().enabled = false;
+			trigger.gameObject.GetComponent<BoxCollider>().enabled = false;
+
 		}
 	}
 }
