@@ -12,16 +12,23 @@ public class carController : MonoBehaviour {
 
 	private Rigidbody rb;
 	private Vector3 driveForce;
+	private int points;
 
 	// Use this for initialization
 	void Start () {
-		countdownDecNum = 5;
+//		countdownDecNum = 5;
 		canDrive = true;
 
 		rb = gameObject.GetComponent<Rigidbody>();
 //		InvokeRepeating ("timerTick", 1, 1);
 		// when it start then when it repeats
-		countdownTimerText.text = countdownDecNum.ToString();
+//		countdownTimerText.text = countdownDecNum.ToString();
+		countdownTimerText.text = "Points : " + points;
+	}
+
+	void AddPoint (){
+		points ++;
+		countdownTimerText.text = "Points : " + points;
 	}
 
 	void timerTick(){
@@ -65,19 +72,22 @@ public class carController : MonoBehaviour {
 //			Application.LoadLevel("level2");
 		}
 	}
+//	void OnTriggerEnter(Collider trigger){
+//		if(trigger.gameObject.tag == "control"){
+//			canDrive = false;
+//		}
+//		if(trigger.gameObject.tag == "goal"){
+////			print("I hit the goal!");
+//			Animator tempGoalAnim = trigger.gameObject.GetComponent<Animator>();
+//			tempGoalAnim.SetBool("stopAnim", true);
+//			ParticleSystem tempParticleEmit = trigger.gameObject.GetComponent<ParticleSystem>();
+//			tempParticleEmit.Play();
+//			trigger.gameObject.GetComponent<Renderer>().enabled = false;
+//			trigger.gameObject.GetComponent<BoxCollider>().enabled = false;
+//
+//		}
+//	}
 	void OnTriggerEnter(Collider trigger){
-		if(trigger.gameObject.tag == "control"){
-			canDrive = false;
-		}
-		if(trigger.gameObject.tag == "goal"){
-//			print("I hit the goal!");
-			Animator tempGoalAnim = trigger.gameObject.GetComponent<Animator>();
-			tempGoalAnim.SetBool("stopAnim", true);
-			ParticleSystem tempParticleEmit = trigger.gameObject.GetComponent<ParticleSystem>();
-			tempParticleEmit.Play();
-			trigger.gameObject.GetComponent<Renderer>().enabled = false;
-			trigger.gameObject.GetComponent<BoxCollider>().enabled = false;
-
-		}
+		
 	}
 }
